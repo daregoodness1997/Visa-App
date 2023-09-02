@@ -24,15 +24,24 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const snap = useSnapshot(state);
   const router = useRouter();
   const ignore = useRef(false);
-  const [checked, setChecked] = useState(false);
+  const [user, setUser] = useState<string>("");
 
   let bookingLink = process.env.NEXT_PUBLIC_FRONTEND_URL + "/visa-form";
+  let email;
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // browser code
+      const response = window.sessionStorage.getItem("email") || "";
+      const split = response.split("@");
+      setUser(split[0]);
+    }
+  }, []);
 
   return (
     <>
       <div className="w-screen app-wrapper mx-auto">
         <div className="flex justify-between items-center">
-          <h3 className="my-8 font-bold text-3xl">Hello Tommy</h3>
+          <h3 className="my-8 font-bold text-3xl capitalize">Hello {user}</h3>
 
           <div className="flex gap-2">
             <Snippet size="md">{bookingLink}</Snippet>

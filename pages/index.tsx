@@ -10,7 +10,6 @@ import { loginSchema } from "@/schema";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { LoginDataType } from "@/types";
-import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -25,6 +24,7 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<LoginDataType>({
     resolver: yupResolver(loginSchema),
@@ -33,38 +33,6 @@ export default function LoginPage() {
       password: "",
     },
   });
-
-  const [user, setUser] = useState<UserProfile | null>(null);
-  const [profile, setProfile] = useState<any | null>(null); // Adjust 'any' to the actual profile type
-
-  const loginGoogle = useGoogleLogin({
-    onSuccess: (codeResponse: any) => setUser(codeResponse),
-    onError: (error: any) => console.log("Login Failed:", error),
-  });
-
-  useEffect(() => {
-    if (user) {
-      axios
-        .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
-          {
-            headers: {
-              Authorization: `Bearer ${user?.access_token || ""}`,
-              Accept: "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          setProfile(res.data);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [user]);
-
-  const logOut = () => {
-    googleLogout();
-    setProfile(null);
-  };
 
   type ResponseType = {
     data:
@@ -105,7 +73,14 @@ export default function LoginPage() {
     }
   };
 
-  const dummySubmit = () => router.push("/app");
+  const dummySubmit = () => {
+    window.sessionStorage.setItem("email", watch("email"));
+    toast.success("Successfully logged in!");
+
+    setTimeout(() => {
+      router.push("/app");
+    }, 1000);
+  };
 
   return (
     <>
@@ -171,6 +146,14 @@ export default function LoginPage() {
               </div>
             </div>
           </form>
+
+          <div className="my-8">
+            <div className="p-4 w-full flex justify-center gap-2">
+              <label className="text-md lg:text-sm">
+                This is a test, login with any email or password
+              </label>
+            </div>
+          </div>
         </div>
       </AuthLayout>
     </>

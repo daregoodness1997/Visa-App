@@ -107,7 +107,7 @@ export default function UserTable() {
               isCompact
               showControls
               showShadow
-              color="secondary"
+              color="primary"
               page={page}
               total={pages}
               onChange={(page) => setPage(page)}
