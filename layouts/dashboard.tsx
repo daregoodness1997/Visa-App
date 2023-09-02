@@ -5,13 +5,16 @@ import state from "@/store";
 import AppNavbar from "@/components/app/app-navbar";
 import Navigation from "@/components/app/naviagtion";
 import {
+  Button,
   Card,
   CardBody,
   CardFooter,
   Divider,
+  Input,
   Link,
   Tab,
   Tabs,
+  Snippet,
 } from "@nextui-org/react";
 
 interface DashboardLayoutProps {
@@ -23,10 +26,18 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const ignore = useRef(false);
   const [checked, setChecked] = useState(false);
 
+  let bookingLink = process.env.NEXT_PUBLIC_FRONTEND_URL + "/visa-form";
+
   return (
     <>
       <div className="w-screen app-wrapper mx-auto">
-        <h3 className="my-8 font-bold text-3xl">Hello Tommy</h3>
+        <div className="flex justify-between items-center">
+          <h3 className="my-8 font-bold text-3xl">Hello Tommy</h3>
+
+          <div className="flex gap-2">
+            <Snippet size="md">{bookingLink}</Snippet>
+          </div>
+        </div>
 
         <div className="my-8 flex gap-4">
           <Card isHoverable={true} fullWidth={true} shadow="md">
@@ -72,8 +83,8 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         </div>
         <div className="flex flex-wrap gap-4 my-4">
           <Tabs color={"primary"} aria-label="Tabs colors" radius="full">
-            <Tab key="countries" title="Countries" />
             <Tab key="customers" title="Customers" />
+            <Tab key="countries" title="Countries" />
             <Tab key="applications" title="Applications" />
           </Tabs>
         </div>

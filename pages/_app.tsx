@@ -55,27 +55,23 @@ export default function App({ Component, pageProps }: AppProps) {
       <NextThemesProvider>
         <main className="dark text-foreground bg-background">
           <SWRConfig>
-            <GoogleOAuthProvider
-              clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENTID || ""}
-            >
-              <Component {...pageProps} />
-              <Toaster
-                toastOptions={{
-                  success: {
-                    style: {
-                      background: "green",
-                      color: "white",
-                    },
+            <Component {...pageProps} />
+            <Toaster
+              toastOptions={{
+                success: {
+                  style: {
+                    background: "green",
+                    color: "white",
                   },
-                  error: {
-                    style: {
-                      background: "red",
-                      color: "white",
-                    },
+                },
+                error: {
+                  style: {
+                    background: "red",
+                    color: "white",
                   },
-                }}
-              />
-            </GoogleOAuthProvider>
+                },
+              }}
+            />
           </SWRConfig>
         </main>
       </NextThemesProvider>

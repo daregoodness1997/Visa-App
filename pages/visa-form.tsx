@@ -9,7 +9,31 @@ export default function VisaForm() {
           <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-4">
               <h1 className={mtTitle({ size: "sm" })}>Visa Application Form</h1>
-              <p className={subtitle({ size: "sm" })}>Fill in the Visa Form</p>
+              <p className={subtitle({ size: "sm" })}>
+                We would need you to fill this form for us to process your
+                application
+              </p>
+            </div>
+            <div className="border-b border-gray-900/10 pb-12">
+              <h2 className="text-base font-semibold leading-7 ">
+                Appointment Information
+              </h2>
+              <p className="mt-1 text-sm leading-6 ">
+                Select an Appointment Date
+              </p>
+
+              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="sm:col-span-3">
+                  <Input
+                    type="date"
+                    name="date"
+                    id="date"
+                    autoComplete="date"
+                    label="Appointment Date"
+                    description="Appointment Date"
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="border-b border-gray-900/10 pb-12">
@@ -17,7 +41,7 @@ export default function VisaForm() {
                 Personal Information
               </h2>
               <p className="mt-1 text-sm leading-6 ">
-                Use a permanent address where you can receive mail.
+                Kindly fill in your personal information
               </p>
 
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -28,6 +52,7 @@ export default function VisaForm() {
                     id="first-name"
                     autoComplete="given-name"
                     label="First Name"
+                    description="Enter your first name"
                   />
                 </div>
 
@@ -36,8 +61,9 @@ export default function VisaForm() {
                     type="text"
                     name="last-name"
                     id="last-name"
-                    autoComplete="given-name"
+                    autoComplete="last-name"
                     label="Last Name"
+                    description="Enter your last name"
                   />
                 </div>
 
@@ -47,6 +73,16 @@ export default function VisaForm() {
                     name="email"
                     label="Email Address"
                     autoComplete="email"
+                    description="Enter your email address, If any"
+                  />
+                </div>
+                <div className="sm:col-span-3">
+                  <Input
+                    type="tel"
+                    name="phone"
+                    label="Phone Number"
+                    autoComplete="phone"
+                    description="Enter your phone number, If any"
                   />
                 </div>
 
@@ -56,6 +92,7 @@ export default function VisaForm() {
                     name="country"
                     label="Country"
                     autoComplete="country"
+                    description="Enter your country's name"
                   />
                 </div>
 
@@ -65,6 +102,7 @@ export default function VisaForm() {
                     label="Street Address"
                     name="street-address"
                     rows={5}
+                    description="Enter your street address"
                   />
                 </div>
 
@@ -74,6 +112,7 @@ export default function VisaForm() {
                     name="city"
                     label="City"
                     autoComplete="city"
+                    description="Enter your city's name"
                   />
                 </div>
 
@@ -83,6 +122,7 @@ export default function VisaForm() {
                     name="state"
                     label="State / Province"
                     autoComplete="state"
+                    description="Enter the name of your state"
                   />
                 </div>
 
@@ -92,6 +132,7 @@ export default function VisaForm() {
                     name="zip"
                     label="Zip / Postal Code"
                     autoComplete="zip"
+                    description="Enter your zip or postal code"
                   />
                 </div>
               </div>
@@ -129,12 +170,7 @@ export default function VisaForm() {
           </div>
 
           <div className="mt-6 flex items-center justify-end gap-x-6">
-            <Button
-              type="button"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Cancel
-            </Button>
+            <Button type="button">Cancel</Button>
             <Button color="primary" type="submit">
               Save
             </Button>

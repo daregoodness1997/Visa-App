@@ -104,11 +104,14 @@ export default function LoginPage() {
       toast.error("Error logging in!" + err);
     }
   };
+
+  const dummySubmit = () => router.push("/app");
+
   return (
     <>
       <AuthLayout title="Login" subTitle="Login to view the portal">
         <div>
-          <form onSubmit={handleSubmit(submit)}>
+          <form onSubmit={handleSubmit(dummySubmit)}>
             <div className="flex flex-col gap-3 my-8">
               <Input
                 type="email"
